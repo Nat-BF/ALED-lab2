@@ -56,13 +56,16 @@ public class SkeletonPanel extends JPanel {
 	}
 
 	private void drawSkeleton(Graphics g, double parentX, double parentY, Node node) {
-		// TODO: Ponga comentarios en este método
 		g.fillOval((int) node.getX() - 4, (int) node.getY() - 4, 8, 8);
-		g.drawLine((int) parentX, (int) parentY, (int) node.getX(), (int) node.getY());
+		//Dibuja un ovalo en la posicion del nodo
+		g.drawLine((int) parentX, (int) parentY, (int) node.getX(), (int) node.getY()); 
+		//Dibuja una linea entre las coordenadas de origen (parent) y otro nodo (node)
 		if (node.getChildren().size() == 0) {
-			return;
+			return; //si el nodo no tiene nodos hijos, sale del método. Caso base.
 		}
 		for (Node child : node.getChildren()) {
+			//Si el nodo tiene hijos, llama al método drawSkeleton (recursividad), 
+			// y trata al nodo como nuevas coordenadas origen. Repite el método por cada nodo hijo.
 			drawSkeleton(g, node.getX(), node.getY(), child);
 		}
 	}
